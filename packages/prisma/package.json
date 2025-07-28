@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "exports": {
-    "./prisma": "./src/index.ts"
+    "./prisma": "./src/index.js"
   },
   "keywords": [],
   "author": "",
