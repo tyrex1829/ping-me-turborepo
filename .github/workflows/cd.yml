@@ -1,0 +1,14 @@
+name: Deploy to production
+on:
+  push:
+    branches: [main]
+
+jobs:
+  redeploy_everything:
+    runs-on: ubuntu-latest
+    name: Deploying everything to production
+    steps:
+      - name: ssh into server
+        run: |
+          echo "${{secrets.SSH_PRIVATE_KEY}}" &> ~/ssh_key
+          ssh -i ~/ssh_key ubuntu@13.233.251.170 -t "cd ping-me-turborepo/ && git pull origin main && pnpm install && pnpm build && pm2 restart frontend-server && pm2 restart http-server && pm2 restart ws-server"
